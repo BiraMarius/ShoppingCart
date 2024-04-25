@@ -32,7 +32,8 @@ public class Product {
     private String description;
 
     @Column
+    private String smallDescription;
+
+    @Column
     private BigDecimal price;
-
-
 }
