@@ -1,5 +1,6 @@
 package com.example.shoppingcart.entity;
 
+import com.example.shoppingcart.util.enums.Status;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -15,9 +16,9 @@ public class Order {
     private Courier courier;
 
     @Column
-    private long StatusId;
+    private Status status;
 
-
+    @Column
     private LocalDateTime dateTime;
 
 }

@@ -1,6 +1,8 @@
 package com.example.shoppingcart.service;
 
+import com.example.shoppingcart.dto.ProductDto;
 import com.example.shoppingcart.entity.Product;
+import com.example.shoppingcart.exceptions.ProductNotFoundException;
 import com.example.shoppingcart.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,9 @@ public class ProductService {
     private Product findProductById(long id){
         Optional<Product> product = productRepository.findById(id);
         if(product.isPresent()){
-
+            return product.get();
+        } else {
+            throw new ProductNotFoundException("Product not found!");
         }
     }
 
