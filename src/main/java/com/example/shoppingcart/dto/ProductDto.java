@@ -1,16 +1,16 @@
 package com.example.shoppingcart.dto;
-
-
 import com.example.shoppingcart.entity.Caracteristic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import com.example.shoppingcart.entity.Category;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Data
+@Getter
+@Setter
 public class ProductDto {
     private long productId;
 
@@ -24,7 +24,10 @@ public class ProductDto {
 
     private String description;
 
+    private String smallDescription;
+
     private BigDecimal price;
 
+    private long stock;
 
 }

@@ -2,11 +2,13 @@ package com.example.shoppingcart.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Entity
 @Getter
+@Setter
 @Table(name="product")
 public class Product {
 
@@ -19,7 +21,7 @@ public class Product {
     private Caracteristic caracteristic;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId", referencedColumnName = "categotyId")
+    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
     private Category category;
 
     @Column
@@ -36,4 +38,7 @@ public class Product {
 
     @Column
     private BigDecimal price;
+
+    @Column
+    private long stock;
 }
