@@ -1,35 +1,29 @@
 package com.example.shoppingcart.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
+@Entity(name="CartItem")
+@Table(name="cart_item")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cartItemId;
 
-    @OneToOne
-    @JoinColumn(name = "productId", referencedColumnName = "productId")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Product_id")
     private Product product;
 
-    @Column
-    private String name;
-
-    @Column
-    private String brand;
-
-    @Column
-    private String smallDescription;
+//    @Column
+//    private String name;
+//
+//    @Column
+//    private String brand;
+//
+//    @Column
+//    private String smallDescription;
 
     @Column
     private int amount;

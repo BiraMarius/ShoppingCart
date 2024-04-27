@@ -29,9 +29,9 @@ public class Functions {
 //    }
 
 
-    public boolean isInStock(Product product, int amount){
-        if (amount <= product.getStock()){
-            return true;
-        } else return false;
-    }
+//    public boolean isInStock(Product product, int amount){
+//        if (amount <= product.getStock()){
+//            return true;
+//        } else return false;
+//    }
 }

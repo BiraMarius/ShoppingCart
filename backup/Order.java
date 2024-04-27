@@ -11,9 +11,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
 
-    @OneToOne
-    @JoinColumn(name="courierId", referencedColumnName = "courierId")
-    private Courier courier;
+//    @OneToOne
+//    @JoinColumn(name="courierId", referencedColumnName = "courierId")
+//    private Courier courier;
 
     @Column
     private Status status;

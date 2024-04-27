@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Specification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long specificationId;
+    private int specificationId;
 
     @Column
     private String name;

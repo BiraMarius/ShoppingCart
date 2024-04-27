@@ -15,6 +15,6 @@ public class Caracteristic {
     @Column
     private String dimenssions;
 
-    @OneToOne(mappedBy = "caracteristic")
-    private Product product;
+//    @OneToOne(mappedBy = "caracteristic")
+//    private Product product;
 }

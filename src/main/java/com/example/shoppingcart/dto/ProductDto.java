@@ -1,7 +1,5 @@
 package com.example.shoppingcart.dto;
-import com.example.shoppingcart.entity.Caracteristic;
-import com.example.shoppingcart.entity.Category;
-import jakarta.persistence.*;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

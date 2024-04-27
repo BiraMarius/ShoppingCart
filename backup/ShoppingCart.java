@@ -19,13 +19,13 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long shoppingCartId;
 
-    @OneToOne
-    @JoinColumn(name="orderId", referencedColumnName = "orderId")
-    private Order order;
+//    @OneToOne
+//    @JoinColumn(name="orderId", referencedColumnName = "orderId")
+//    private Order order;
 
-    @OneToMany
-    @JoinColumn(name = "cartItemId", referencedColumnName = "cartItemId")
-    private List<CartItem> cartItemList;
+//    @OneToMany
+//    @JoinColumn(name = "cartItemId", referencedColumnName = "cartItemId")
+//    private List<CartItem> cartItemList;
 
     @Column
     private BigDecimal totalPrice;
