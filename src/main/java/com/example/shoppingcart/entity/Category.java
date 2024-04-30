@@ -24,6 +24,13 @@ public class Category {
     @JoinColumn(name="idds")
     private List<Product> products = new ArrayList<>();
 
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name="subCategoryId")
+    private List<Product> subCategories = new ArrayList<>();
+
 
     @Column
     private String Name;
