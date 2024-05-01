@@ -29,7 +29,7 @@ public class Category {
             orphanRemoval = true
     )
     @JoinColumn(name="subCategoryId")
-    private List<Product> subCategories = new ArrayList<>();
+    private List<Subcategory> subCategories = new ArrayList<>();
 
 
     @Column
