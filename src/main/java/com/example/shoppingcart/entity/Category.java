@@ -21,14 +21,14 @@ public class Category {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JoinColumn(name="productList")
+    @JoinColumn(name="product_List")
     private List<Product> products = new ArrayList<>();
 
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JoinColumn(name="subcategoryList")
+    @JoinColumn(name="subcategory_List")
     private List<Subcategory> subcategories = new ArrayList<>();
 
 
