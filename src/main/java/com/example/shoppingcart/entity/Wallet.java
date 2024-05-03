@@ -3,11 +3,23 @@ package com.example.shoppingcart.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
+@Entity(name="Wallet")
 @Table(name = "wallet")
 @Data
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long walletId;
+
+    @Column
+    private String cardNo;
+
+    @Column
+    private String expirationDate;
+
+    @Column
+    private String cvv;
+
+    @Column
+    private String nameOnCard;
 }
