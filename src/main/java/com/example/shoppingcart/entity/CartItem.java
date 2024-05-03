@@ -18,15 +18,6 @@ public class CartItem {
     private Product product;
 
     @Column
-    private String name;
-
-    @Column
-    private String brand;
-
-    @Column
-    private String smallDescription;
-
-    @Column
     private int amount;
 
     @Column
