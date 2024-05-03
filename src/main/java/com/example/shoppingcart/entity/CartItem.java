@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 @Entity(name="CartItem")
 @Table(name="cart_item")
+@Data
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,14 +17,14 @@ public class CartItem {
     @JoinColumn(name = "Product_id")
     private Product product;
 
-//    @Column
-//    private String name;
-//
-//    @Column
-//    private String brand;
-//
-//    @Column
-//    private String smallDescription;
+    @Column
+    private String name;
+
+    @Column
+    private String brand;
+
+    @Column
+    private String smallDescription;
 
     @Column
     private int amount;
