@@ -6,29 +6,26 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name="Category")
+@Table(name="category")
 @Data
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categoryId;
 
-//    @OneToMany
-//    @JoinColumn(name = "subCategoryId", referencedColumnName = "subCategoryId")
-//    private List<Subcategory> subcategories;
-
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JoinColumn(name="product_List")
+    @JoinColumn(name="productsList")
     private List<Product> products = new ArrayList<>();
 
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JoinColumn(name="subcategory_List")
+    @JoinColumn(name="subcategoriesList")
     private List<Subcategory> subcategories = new ArrayList<>();
 
 
