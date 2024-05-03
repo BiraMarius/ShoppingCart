@@ -11,9 +11,9 @@ public class Specification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long specificationId;
 
-//    @Column
-//    private String name;
-//
-//    @Column
-//    private String value;
+    @Column
+    private String name;
+
+    @Column
+    private String specificationValue;
 }

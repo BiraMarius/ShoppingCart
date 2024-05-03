@@ -10,15 +10,19 @@ import java.util.List;
 @Table(name="subcategoty")
 @Data
 public class Subcategory {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long subcategotyId;
 
-//    @OneToMany(
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    @JoinColumn(name="specificationsList")
-//    private List<Specification> specifications = new ArrayList<>();
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name="specificationsList")
+    private List<Specification> specifications = new ArrayList<>();
+
+    @Column
+    private String name;
+
+
 }

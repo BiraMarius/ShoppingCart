@@ -30,5 +30,5 @@ public class Category {
 
 
     @Column
-    private String Name;
+    private String name;
 }
