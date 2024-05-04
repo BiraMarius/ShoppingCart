@@ -10,4 +10,13 @@ public class Courier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long courierId;
+
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
+    @Column
+    private String phone;
 }
