@@ -1,12 +1,15 @@
 package com.example.shoppingcart.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "Cart")
+@Table(name = "cart")
+@Data
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,16 +19,16 @@ public class Cart {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JoinColumn(name="cartItem")
+    @JoinColumn(name = "cartItem")
     private List<CartItem> cartItemList = new ArrayList<>();
 
-    @Column
-    //add foreign key
-    private long clientId;
+    //    @Column
+//    //add foreign key
+//    private long clientId;
 
-    @Column
-    //add foreign key
-    private long orderId;
+    @OneToOne(mappedBy = "cart")
+    private Order Order;
+
 
     @Column
     private BigDecimal total;
