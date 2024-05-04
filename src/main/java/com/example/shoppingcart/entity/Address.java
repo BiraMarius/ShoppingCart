@@ -1,13 +1,47 @@
 package com.example.shoppingcart.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 
-@Entity
+@Entity(name="Address")
+@Table(name="address")
+@Data
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long addressId;
+
+    @Column
+    private String country;
+
+    @Column
+    private String city;
+
+    @Column
+    private String stateCountySector;
+
+    @Column
+    private String street;
+
+    @Column
+    private String number;
+
+    @Column
+    private String zip;
+
+    @Column
+    private String building;
+
+    @Column
+    private String entryNo;
+
+    @Column
+    private String floor;
+
+    @Column
+    private String apartament;
+
+    @Column
+    private String interphone;
+
 }
