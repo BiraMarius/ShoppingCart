@@ -22,9 +22,8 @@ public class Cart {
     @JoinColumn(name = "cartItem")
     private List<CartItem> cartItemList = new ArrayList<>();
 
-    //    @Column
-//    //add foreign key
-//    private long clientId;
+    @OneToOne(mappedBy = "cart")
+    private Client client;
 
     @OneToOne(mappedBy = "cart")
     private Order Order;

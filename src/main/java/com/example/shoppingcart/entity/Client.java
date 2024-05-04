@@ -28,6 +28,10 @@ public class Client {
     @JoinColumn(name="addressesList")
     private List<Address> adresses = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cartId")
+    private Cart cart;
+
     @Column
     private String firstName;
 
