@@ -28,6 +28,9 @@ public class Client {
     @JoinColumn(name="addressesList")
     private List<Address> adresses = new ArrayList<>();
 
+    @OneToOne(mappedBy = "client")
+    private Favorite favorite;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cartId")
     private Cart cart;

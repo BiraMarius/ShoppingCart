@@ -21,6 +21,7 @@ public class Product {
    //@JoinColumn(name = "Caracteristics", referencedColumnName = "caracteristicsId")
     private Caracteristics caracteristics;
 
+
 //    @ManyToOne
 //    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
 //    private Category category;
