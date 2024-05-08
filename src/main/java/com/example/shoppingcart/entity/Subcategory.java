@@ -12,7 +12,7 @@ import java.util.List;
 public class Subcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long subcategotyId;
+    private long subcategoryId;
 
     @OneToMany(
             cascade = CascadeType.ALL,
