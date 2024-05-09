@@ -22,9 +22,9 @@ public class Product {
     private Caracteristics caracteristics;
 
 
-//    @ManyToOne
-//    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
-//    private Category category;
+    @ManyToOne
+    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
+    private Category category;
 
     @OneToOne(mappedBy = "product")
     private CartItem cartItem;

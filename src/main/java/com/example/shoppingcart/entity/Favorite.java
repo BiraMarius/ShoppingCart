@@ -22,4 +22,7 @@ public class Favorite {
             orphanRemoval = true)
     @JoinColumn(name = "productId")
     private List<Product> favoriteProducts = new ArrayList<>();
+
+    @Column(insertable=false, updatable=false)
+    private long clientId;
 }
