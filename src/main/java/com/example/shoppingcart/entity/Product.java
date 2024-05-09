@@ -26,8 +26,8 @@ public class Product {
     @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
     private Category category;
 
-    @OneToOne(mappedBy = "product")
-    private CartItem cartItem;
+//    @OneToOne(mappedBy = "product")
+//    private CartItem cartItem;
 
     @Column
     private String name;

@@ -1,4 +1,5 @@
 ENDPOINTS:
+I) Adaugare Item in cosul unui client(
 1.Detalii cos
 2.Listare produse disponibile
 3.Adaugare pe baza @2
@@ -6,11 +7,17 @@ ENDPOINTS:
 5.Muta in favorite
 6.Sterge produs
 
+
 ---------------
 
 Pagina 2
 1.Listare de detalii pe baza user-ului curent
 2.Facturare
+
+
+
+
+
 
 17.04.2024 LINKS
 W3 SmartSolutions
@@ -39,4 +46,13 @@ W3 SmartSolutions
 https://howtodoinjava.com/hibernate/hibernate-one-to-many-mapping/
 W3 SmartSolutions
 19:51
+https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
+
+09.05.2024
+Andrei Bartic
+17:58
+https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
+Andrei Bartic
+18:15
+https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
 https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/

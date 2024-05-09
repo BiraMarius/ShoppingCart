@@ -1,8 +1,9 @@
 package com.example.shoppingcart;
 
+import com.example.shoppingcart.entity.Cart;
+import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Category;
 import com.example.shoppingcart.entity.Product;
-import com.example.shoppingcart.mapper.ProductMapper;
 
 import com.example.shoppingcart.repository.CategoryRepository;
 import com.example.shoppingcart.repository.ProductRepository;
@@ -12,26 +13,24 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-public class Controller {
+public class CartController {
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-
-      private final ProductRepository productRepository;
-      private final CategoryRepository categoryRepository;
-
-    public Controller(ProductRepository productRepository, CategoryRepository categoryRepository) {
-        this.productRepository = productRepository;
-        this.categoryRepository = categoryRepository;
-    }
-//    private final ShoppingCartService shoppingCartService;
+    private final ShoppingCartService shoppingCartService;
 //
 //    private final ProductMapper productMapper;
 //
 //    private final ShoppingCartRepository shoppingCartRepository;
-//
-//
+
+    public CartController(ProductRepository productRepository, CategoryRepository categoryRepository, ShoppingCartService shoppingCartService) {
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+        this.shoppingCartService = shoppingCartService;
+    }
+
 //    public Controller(ProductRepository productRepository, ShoppingCartService shoppingCartService, ProductMapper productMapper, ShoppingCartRepository shoppingCartRepository) {
 //        this.productRepository = productRepository;
 //        this.shoppingCartService = shoppingCartService;
@@ -64,7 +63,8 @@ public class Controller {
 //    }
 
 //    @GetMapping("/show-products-in-cart")
-//    public List<CartItem> showproductsInCart(@RequestParam long cartId){
+//    public List<CartItem> showproductsInCart(@RequestParam long clientId) {
+//
 //        return shoppingCartRepository.findByShoppingCartId(cartId).getCartItemList();
 //    }
 
@@ -78,8 +78,14 @@ public class Controller {
 //        return shoppingCartService.removeOneCartItem(shoppingCart.getShoppingCartId(),cartItemDto);
 //    }
 
+
+    @PostMapping("/insert-into-cart")
+    public void insertInCart(){
+        shoppingCartService.insertIntoCart();
+    }
+
     @GetMapping("/findAll")
-    public void findAll(){
+    public void findAll() {
         System.out.println("inainte");
         Product product = new Product();
         //INSERT INTO PRODUCT(NAME, BRAND, DESCRIPTION, PRICE,STOCK,SMALL_DESCRIPTION) VALUES('Telefon','Samsung','Nou','1000','1','ss');
@@ -99,11 +105,9 @@ public class Controller {
         product2.setSmallDescription("vechi");
 
 
-
-
         Category category = new Category();
         category.setName("telefon");
-        category.setProducts(Arrays.asList(product,product2));
+        category.setProducts(Arrays.asList(product, product2));
 
 
         productRepository.save(product);
@@ -114,9 +118,6 @@ public class Controller {
 
         System.out.println("dupa");
     }
-
-
-
 
 
 }

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "Cart")
+@Entity(name = "cart")
 @Table(name = "cart")
 @Data
 public class Cart {
@@ -16,14 +16,15 @@ public class Cart {
     private long cartId;
 
     @OneToMany(
+            mappedBy="cart",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JoinColumn(name = "cartItem")
     private List<CartItem> cartItemList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "cart")
-    private Client client;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "cart_id")
+//    private Client client;
 
     @OneToOne(mappedBy = "cart")
     private Order Order;
