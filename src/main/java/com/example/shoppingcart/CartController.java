@@ -104,18 +104,13 @@ public class CartController {
         product2.setStock(2);
         product2.setSmallDescription("vechi");
 
-
         Category category = new Category();
         category.setName("telefon");
         category.setProducts(Arrays.asList(product, product2));
 
-
         productRepository.save(product);
-
         categoryRepository.save(category);
-
         categoryRepository.findAll();
-
         System.out.println("dupa");
     }
 
