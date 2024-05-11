@@ -1,5 +1,6 @@
 package com.example.shoppingcart.service;
 
+import com.example.shoppingcart.dto.CartItemDto;
 import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Client;
@@ -89,6 +90,14 @@ public class ShoppingCartService {
         //- daca nu exista fa un obiect de tip cart un obiect de tip cart item si se repteta logica de sus
     }
 
+    public void inShoppingcart(){
+        Cart cart = new Cart();
+
+    }
+
+    public CartItemDto productToCartItemDto(){
+
+    }
 
 
 
