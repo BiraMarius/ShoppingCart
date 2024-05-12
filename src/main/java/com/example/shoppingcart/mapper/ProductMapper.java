@@ -1,14 +1,24 @@
 package com.example.shoppingcart.mapper;
 
 import com.example.shoppingcart.dto.CartItemDto;
+import com.example.shoppingcart.dto.ProductDto;
 import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Product;
+import com.example.shoppingcart.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class ProductMapper {
+    private final ProductRepository productRepository;
+
+    public ProductMapper(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
 
     //                NOT USED !!!!
 //    public ProductDto entityToDto(Product product){
@@ -52,4 +62,41 @@ public class ProductMapper {
 //        return cartItemDto;
 //    }
 
+    public CartItemDto cartItemDtoFromProductDto(ProductDto productDto){
+        CartItemDto cartItemDto = new CartItemDto();
+        cartItemDto.setProductId(productDto.getProductId());
+
+    }
+
+    public void addToCart(ProductDto productDto){
+        CartItemDto cartItemDto = new CartItemDto();
+        cartItemDto.setProductId(productDto.getProductId());
+
+    }
+
+    public CartDto createCart(){
+        CartDto cartDto = new CartDto();
+        //exista un cart deja?
+        // nu exista ?
+    }
+
+    //Omul adauga in cart ProductDto printr-o functie ce il transforma in CartItem
+
+    public ProductDto getProductDetails(long productId){
+        Optional<Product> productOpt = productRepository.findById(productId);
+        if (productOpt.isPresent()){
+            return getProductFromOptional(productOpt);
+        } else return null; // TODO> FIX RETURN NULL
+    }
+
+    private ProductDto getProductFromOptional(Optional<Product> productOpt){
+        ProductDto productDto = new ProductDto();
+        productDto.setName(productOpt.get().getName());
+        productDto.setBrand(productOpt.get().getBrand());
+        productDto.setDescription(productOpt.get().getDescription());
+        productDto.setSmallDescription(productOpt.get().getSmallDescription());
+        productDto.setPrice(productOpt.get().getPrice());
+        productDto.setStock(productOpt.get().getStock());
+        return productDto;
+    }
 }
