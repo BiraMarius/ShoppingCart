@@ -22,9 +22,10 @@ public class Cart {
     )
     private List<CartItem> cartItemList = new ArrayList<>();
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "cart_id")
-//    private Client client;
+    //Was commented
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id")
+    private Client client;
 
     @OneToOne(mappedBy = "cart")
     private Order Order;
