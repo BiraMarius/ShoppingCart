@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Component
@@ -75,11 +76,23 @@ public class ProductMapper {
 
     }
 
-    public void addToCart(ProductDto productDto, long clientId){
+    public void addToCart(ProductDto productDto, int amount, long clientId){
         CartDto cartDto = findCart(clientId);
         CartItemDto cartItemDto = new CartItemDto();
         cartItemDto.setProductId(productDto.getProductId());
+        cartItemDto.setName(productDto.getName());
+        cartItemDto.setBrand(productDto.getBrand());
+        cartItemDto.setSmallDescription(productDto.getSmallDescription());
+        cartItemDto.setDescription(productDto.getDescription());
+        cartItemDto.setTotalPerItemType(pricePerCartItemCalculator(productDto.getPrice(), amount));
+        cartItemDto.setPricePerItem(productDto.getPrice());
+        cartItemDto.setAmount(amount);
+        cartItemDto.setShoppingCartId(cartDto.getCartId());
+    }
 
+    public BigDecimal pricePerCartItemCalculator(BigDecimal price, int amount){
+        BigDecimal total = price.multiply(BigDecimal.valueOf(amount));
+        return total;
     }
 
     public CartDto createOrReturnCart(CartItemDto cartItemDto, long clientId){
@@ -133,6 +146,14 @@ public class ProductMapper {
             return getProductFromOptional(productOpt);
         } else return null; // TODO> FIX RETURN NULL
     }
+
+    public CartItemDto productToCartItemDto(long productId){
+        ProductDto productDto = getProductDetails(productId);
+        CartItemDto cartItemDto = new CartItemDto();
+        cartItemDto.setProductId(productDto.getProductId());
+    }
+
+
 
     private ProductDto getProductFromOptional(Optional<Product> productOpt){
         ProductDto productDto = new ProductDto();
