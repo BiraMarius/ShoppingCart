@@ -70,14 +70,16 @@ public class ProductMapper {
 //        return cartItemDto;
 //    }
 
-    public CartItemDto cartItemDtoFromProductDto(ProductDto productDto){
-        CartItemDto cartItemDto = new CartItemDto();
-        cartItemDto.setProductId(productDto.getProductId());
 
-    }
 
     public void addToCart(ProductDto productDto, int amount, long clientId){
         CartDto cartDto = findCart(clientId);
+        CartItemDto cartItemDto = productToCartItemDtoForCart(productDto, amount, clientId);
+        cartItemDto.setShoppingCartId(cartDto.getCartId());
+    }
+
+    //Method that take a ProductDto and transforms it to CartItem
+    public CartItemDto productToCartItemDtoForCart(ProductDto productDto, int amount, long clientId){
         CartItemDto cartItemDto = new CartItemDto();
         cartItemDto.setProductId(productDto.getProductId());
         cartItemDto.setName(productDto.getName());
@@ -87,17 +89,12 @@ public class ProductMapper {
         cartItemDto.setTotalPerItemType(pricePerCartItemCalculator(productDto.getPrice(), amount));
         cartItemDto.setPricePerItem(productDto.getPrice());
         cartItemDto.setAmount(amount);
-        cartItemDto.setShoppingCartId(cartDto.getCartId());
+        return cartItemDto;
     }
 
     public BigDecimal pricePerCartItemCalculator(BigDecimal price, int amount){
         BigDecimal total = price.multiply(BigDecimal.valueOf(amount));
         return total;
-    }
-
-    public CartDto createOrReturnCart(CartItemDto cartItemDto, long clientId){
-        CartDto cartDto = findCart(clientId);
-
     }
 
     //Omul adauga in cart ProductDto printr-o functie ce il transforma in CartItem
@@ -146,14 +143,6 @@ public class ProductMapper {
             return getProductFromOptional(productOpt);
         } else return null; // TODO> FIX RETURN NULL
     }
-
-    public CartItemDto productToCartItemDto(long productId){
-        ProductDto productDto = getProductDetails(productId);
-        CartItemDto cartItemDto = new CartItemDto();
-        cartItemDto.setProductId(productDto.getProductId());
-    }
-
-
 
     private ProductDto getProductFromOptional(Optional<Product> productOpt){
         ProductDto productDto = new ProductDto();
