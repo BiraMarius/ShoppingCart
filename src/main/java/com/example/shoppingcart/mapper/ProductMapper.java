@@ -27,51 +27,6 @@ public class ProductMapper {
         this.clientRepository = clientRepository;
     }
 
-
-    //                NOT USED !!!!
-//    public ProductDto entityToDto(Product product){
-//        ProductDto productDto = new ProductDto();
-//        productDto.setProductId(product.getProductId());
-//        productDto.setName(product.getName());
-//        productDto.setBrand(product.getBrand());
-//        productDto.setDescription(product.getDescription());
-//        productDto.setPrice(product.getPrice());
-//        productDto.setSmallDescription(productDto.getSmallDescription());
-//        return productDto;
-//    }
-
-//    public Product productDtoToEntity(CartItemDto cartItemDto){
-//        Product product = new Product();
-//        product.setProductId(cartItemDto.getProductId());
-//        product.setName(cartItemDto.getName());
-//        product.setBrand(cartItemDto.getBrand());
-//        product.setSmallDescription(cartItemDto.getSmallDescription());
-//        product.setPrice(cartItemDto.getPricePerItem());
-//        product.setDescription(cartItemDto.getDescription());
-//        return product;
-//    }
-//
-//    public CartItem cartItemToEntity(Product product){
-//        CartItem cartItem = new CartItem();
-//        //cartItem.setProduct(product);
-//        cartItem.setName(product.getName());
-//        cartItem.setBrand(product.getBrand());
-//        cartItem.setSmallDescription(product.getSmallDescription());
-//        cartItem.setTotalPerItemType(product.getPrice());
-//        return cartItem;
-//    }
-//
-//    public CartItemDto cartItemToDto(CartItem cartItem){
-//        CartItemDto cartItemDto = new CartItemDto();
-//        //cartItemDto.setProductId(cartItem.getProduct().getProductId());
-//        cartItemDto.setBrand(cartItem.getBrand());
-//        cartItemDto.setName(cartItem.getName());
-//        cartItemDto.setSmallDescription(cartItem.getSmallDescription());
-//        return cartItemDto;
-//    }
-
-
-
     public void addToCart(ProductDto productDto, int amount, long clientId){
         CartDto cartDto = findCart(clientId);
         CartItemDto cartItemDto = productToCartItemDtoForCart(productDto, amount, clientId);
@@ -98,7 +53,6 @@ public class ProductMapper {
     }
 
     //Omul adauga in cart ProductDto printr-o functie ce il transforma in CartItem
-
     public CartDto findCart(long clientId){
         ClientDto clientDto = findClientDto(clientId);
         if(clientDto.getCart() != null){
@@ -154,4 +108,6 @@ public class ProductMapper {
         productDto.setStock(productOpt.get().getStock());
         return productDto;
     }
+
+
 }
