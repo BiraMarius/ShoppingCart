@@ -18,9 +18,9 @@ public class CartItem {
     private Cart cart;
 
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "Product_id")
-//    private Product product;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Product_id")
+    private Product product;
 
     @Column
     private int amount;

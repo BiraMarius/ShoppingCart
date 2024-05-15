@@ -27,13 +27,6 @@ public class ProductMapper {
         this.clientRepository = clientRepository;
     }
 
-    public void addToCart(ProductDto productDto, int amount, long clientId){
-        CartDto cartDto = findCart(clientId);
-        CartItemDto cartItemDto = productToCartItemDtoForCart(productDto, amount, clientId);
-        cartItemDto.setShoppingCartId(cartDto.getCartId());
-    }
-
-    //Method that take a ProductDto and transforms it to CartItem
     public CartItemDto productToCartItemDtoForCart(ProductDto productDto, int amount, long clientId){
         CartItemDto cartItemDto = new CartItemDto();
         cartItemDto.setProductId(productDto.getProductId());
@@ -52,14 +45,6 @@ public class ProductMapper {
         return total;
     }
 
-    //Omul adauga in cart ProductDto printr-o functie ce il transforma in CartItem
-    public CartDto findCart(long clientId){
-        ClientDto clientDto = findClientDto(clientId);
-        if(clientDto.getCart() != null){
-            return cartToDto(clientDto.getCart());
-        } else return new CartDto();
-    }
-
     public CartDto cartToDto(Cart cart){
         CartDto cartDto = new CartDto();
         cartDto.setCartId(cart.getCartId());
@@ -70,12 +55,7 @@ public class ProductMapper {
         return  cartDto;
     }
 
-    public ClientDto findClientDto(long clientId){
-        Optional<Client> client = clientRepository.findById(clientId);
-        if (client.isPresent()){
-            return clientToDto(client);
-        }else return null;// TODO> FIX RETURN NULL
-    }
+
 
     public ClientDto clientToDto(Optional<Client> client){
         ClientDto clientDto = new ClientDto();
