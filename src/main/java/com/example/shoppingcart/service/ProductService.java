@@ -9,6 +9,7 @@ import com.example.shoppingcart.entity.Product;
 import com.example.shoppingcart.exceptions.ProductNotFoundException;
 
 import com.example.shoppingcart.mapper.ProductMapper;
+import com.example.shoppingcart.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ public class ProductService {
 
     private final CartService cartService;
     private final ProductMapper productMapper;
+    private final ProductRepository productRepository;
 
     public void addToCart(ProductDto productDto, int amount, long clientId){
         CartDto cartDto = cartService.findCart(clientId);
@@ -87,6 +89,14 @@ public class ProductService {
         product6.setDescription("Prosecco stors si fermentat din struguri virgini din Franta si Italia");
         product6.setSmallDescription("Prosecco France&Italy");
         product6.setPrice(BigDecimal.valueOf(900));
+
+        productRepository.save(product1);
+        productRepository.save(product2);
+        productRepository.save(product3);
+        productRepository.save(product4);
+        productRepository.save(product5);
+        productRepository.save(product6);
+
     }
 
 
