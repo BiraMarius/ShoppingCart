@@ -1,13 +1,12 @@
 package com.example.shoppingcart.service;
 
-import com.example.shoppingcart.dto.CartItemDto;
 import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Client;
 import com.example.shoppingcart.mapper.ProductMapper;
 
 import com.example.shoppingcart.repository.ClientRepository;
-import com.example.shoppingcart.repository.ShoppingCartRepository;
+import com.example.shoppingcart.repository.CartRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ import java.util.Optional;
 @ComponentScan("com.example.shoppingcart")
 public class ShoppingCartService {
     private final ProductMapper productMapper;
-    private final ShoppingCartRepository shoppingCartRepository;
+    private final CartRepository shoppingCartRepository;
     private final ClientRepository clientRepository;
 
 //    public CartItemDto addToCartItemDto(long shoppingCartId, Product product){

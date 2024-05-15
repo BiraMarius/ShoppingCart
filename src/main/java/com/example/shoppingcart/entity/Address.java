@@ -11,6 +11,9 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long addressId;
 
+    @ManyToOne
+    private Client client;
+
     @Column
     private String country;
 

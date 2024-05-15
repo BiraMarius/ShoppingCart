@@ -2,28 +2,27 @@ package com.example.shoppingcart.dto;
 
 import com.example.shoppingcart.entity.Address;
 import com.example.shoppingcart.entity.Cart;
-import com.example.shoppingcart.entity.Favorite;
 import com.example.shoppingcart.entity.Wallet;
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Getter
-@Setter
-public class ClientDto {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Client2Dto {
 
     private long clientId;
 
-    private List<Wallet> wallets = new ArrayList<>();
+    private List<Wallet> wallets;
 
-    private List<Address> adresses = new ArrayList<>();
+    private List<Address> adresses;
 
-    private Favorite favorite;
+    //private Favorite favorite;
 
     private Cart cart;
 

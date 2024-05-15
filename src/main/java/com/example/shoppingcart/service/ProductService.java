@@ -2,19 +2,17 @@ package com.example.shoppingcart.service;
 
 import com.example.shoppingcart.dto.CartDto;
 import com.example.shoppingcart.dto.CartItemDto;
+import com.example.shoppingcart.dto.ItemDto;
 import com.example.shoppingcart.dto.ProductDto;
-import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.Product;
 
-import com.example.shoppingcart.exceptions.ProductNotFoundException;
-
-import com.example.shoppingcart.mapper.ProductMapper;
+import com.example.shoppingcart.mapper.CartMapper;
+import com.example.shoppingcart.repository.CartRepository;
 import com.example.shoppingcart.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -32,17 +30,21 @@ public class ProductService {
 //    }
 
     private final CartService cartService;
-    private final ProductMapper productMapper;
     private final ProductRepository productRepository;
+    private final CartMapper cartMapper;
+    private final CartRepository cartRepository;
 
-    public void addToCart(ProductDto productDto, int amount, long clientId){
-        CartDto cartDto = cartService.findCart(clientId);
-        CartItemDto cartItemDto = productMapper.productToCartItemDtoForCart(productDto, amount, clientId);
+    public void addToCart(ItemDto itemDto){
+        CartDto cartDto = cartService.findCart(itemDto.getClientId());
+        CartItemDto cartItemDto = cartMapper.productToCartItemDtoForCart(itemDto.getProductDto());
+        cartItemDto.setTotalPerItemType(cartService.pricePerCartItemCalculator(itemDto.getProductDto().getPrice(), itemDto.getAmount()));
+        cartItemDto.setAmount(itemDto.getAmount());
         cartItemDto.setShoppingCartId(cartDto.getCartId());
+        cartRepository.save(cartMapper.dtoToEntity(cartDto));
     }
 
     public void addToCartWithProductid(long productId, int amount, long clientId){
-        CartDto cartDto = cartService.findCart(clientId);
+        CartDto cartDto = cartService.findCart(clientId); // TODO FINISH THIS METHOD
     }
 
 
@@ -96,7 +98,6 @@ public class ProductService {
         productRepository.save(product4);
         productRepository.save(product5);
         productRepository.save(product6);
-
     }
 
 

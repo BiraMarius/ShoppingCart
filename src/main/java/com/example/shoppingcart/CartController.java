@@ -1,5 +1,7 @@
 package com.example.shoppingcart;
 
+import com.example.shoppingcart.dto.ItemDto;
+import com.example.shoppingcart.dto.ProductDto;
 import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Category;
@@ -7,6 +9,7 @@ import com.example.shoppingcart.entity.Product;
 
 import com.example.shoppingcart.repository.CategoryRepository;
 import com.example.shoppingcart.repository.ProductRepository;
+import com.example.shoppingcart.service.ProductService;
 import com.example.shoppingcart.service.ShoppingCartService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,19 +19,14 @@ import java.util.List;
 
 @RestController
 public class CartController {
-    private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
-
     private final ShoppingCartService shoppingCartService;
-//
-//    private final ProductMapper productMapper;
-//
-//    private final ShoppingCartRepository shoppingCartRepository;
+    private final ProductService productService;
 
-    public CartController(ProductRepository productRepository, CategoryRepository categoryRepository, ShoppingCartService shoppingCartService) {
-        this.productRepository = productRepository;
-        this.categoryRepository = categoryRepository;
+
+    public CartController(ShoppingCartService shoppingCartService, ProductService productService) {
+
         this.shoppingCartService = shoppingCartService;
+        this.productService = productService;
     }
 
 //    public Controller(ProductRepository productRepository, ShoppingCartService shoppingCartService, ProductMapper productMapper, ShoppingCartRepository shoppingCartRepository) {
@@ -84,35 +82,17 @@ public class CartController {
         shoppingCartService.insertIntoCart();
     }
 
-    @GetMapping("/findAll")
-    public void findAll() {
-        System.out.println("inainte");
-        Product product = new Product();
-        //INSERT INTO PRODUCT(NAME, BRAND, DESCRIPTION, PRICE,STOCK,SMALL_DESCRIPTION) VALUES('Telefon','Samsung','Nou','1000','1','ss');
-        product.setName("Samsung");
-        product.setBrand("SAM CO");
-        product.setDescription("NOUUU");
-        product.setPrice(BigDecimal.valueOf(1000));
-        product.setStock(2);
-        product.setSmallDescription("vechi");
 
-        Product product2 = new Product();
-        product2.setName("Apple");
-        product2.setBrand("SAM CO");
-        product2.setDescription("sssss");
-        product2.setPrice(BigDecimal.valueOf(1000));
-        product2.setStock(2);
-        product2.setSmallDescription("vechi");
 
-        Category category = new Category();
-        category.setName("telefon");
-        category.setProducts(Arrays.asList(product, product2));
-
-        productRepository.save(product);
-        categoryRepository.save(category);
-        categoryRepository.findAll();
-        System.out.println("dupa");
+    @PostMapping("/add-to-cart")
+    public void addInCart(@RequestBody ItemDto itemDto){
+        productService.addToCart(itemDto);
     }
+
+
+
+
+
 
 
 }

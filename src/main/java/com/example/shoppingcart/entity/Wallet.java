@@ -11,6 +11,9 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long walletId;
 
+    @ManyToOne
+    private Client client;
+
     @Column
     private String cardNo;
 

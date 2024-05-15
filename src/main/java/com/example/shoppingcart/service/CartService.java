@@ -1,14 +1,14 @@
 package com.example.shoppingcart.service;
 
 import com.example.shoppingcart.dto.CartDto;
-import com.example.shoppingcart.dto.ClientDto;
+import com.example.shoppingcart.dto.Client2Dto;
 import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Client;
-import com.example.shoppingcart.entity.Product;
+import com.example.shoppingcart.mapper.CartMapper;
 import com.example.shoppingcart.mapper.ProductMapper;
 import com.example.shoppingcart.repository.ClientRepository;
-import com.example.shoppingcart.repository.ShoppingCartRepository;
+import com.example.shoppingcart.repository.CartRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +23,27 @@ public class CartService {
     private final ProductMapper productMapper;
     private final ClientService clientService;
     private final ClientRepository clientRepository;
-    private final ShoppingCartRepository shoppingCartRepository;
+    private final CartRepository shoppingCartRepository;
+    private final CartMapper cartMapper;
 
     public CartDto findCart(long clientId){
-        ClientDto clientDto = clientService.findClientDto(clientId);
+        Client2Dto clientDto = clientService.findClientDto(clientId);
         if(clientDto.getCart() != null){
-            return productMapper.cartToDto(clientDto.getCart());
-        } else return new CartDto();
+            return cartMapper.cartToDto(clientDto.getCart());
+        } else {
+            return getCartDto(clientId);
+        }
+    }
+
+    private CartDto getCartDto(long clientId) {
+        CartDto cartDto = new CartDto();
+        Optional<Client> clientOpt = clientRepository.findById(clientId);
+        clientOpt.ifPresent(cartDto::setClient);
+        return cartDto;
+    }
+
+    public BigDecimal pricePerCartItemCalculator(BigDecimal price, int amount){
+        return price.multiply(BigDecimal.valueOf(amount));
     }
 
 //    public CartItemDto addToCartItemDto(long shoppingCartId, Product product){
@@ -98,6 +112,5 @@ public class CartService {
         //- daca nu exista fa un obiect de tip cart un obiect de tip cart item si se repteta logica de sus
 
     }
-
 
 }
