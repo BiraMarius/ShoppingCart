@@ -20,6 +20,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long clientId;
 
+    //cascade give error
     @OneToMany(
             //cascade = CascadeType.ALL,
             orphanRemoval = true
