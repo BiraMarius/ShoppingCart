@@ -16,7 +16,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL,
+    @OneToOne(mappedBy = "product", //cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
    //@JoinColumn(name = "Caracteristics", referencedColumnName = "caracteristicsId")
     private Caracteristics caracteristics;

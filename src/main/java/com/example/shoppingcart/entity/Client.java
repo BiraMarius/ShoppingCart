@@ -21,14 +21,14 @@ public class Client {
     private long clientId;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            //cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     @JoinColumn(name="walletsList")
     private List<Wallet> wallets;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            //cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     @JoinColumn(name="addressesList")
