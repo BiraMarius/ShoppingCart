@@ -10,7 +10,7 @@ public class CartItemDto {
 
     private long productId;
 
-    private long shoppingCartId;
+    private long cartId;
 
     private String name;
 

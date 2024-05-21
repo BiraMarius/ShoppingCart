@@ -1,41 +1,21 @@
 package com.example.shoppingcart;
 
 import com.example.shoppingcart.dto.ItemDto;
-import com.example.shoppingcart.dto.ProductDto;
-import com.example.shoppingcart.entity.Cart;
-import com.example.shoppingcart.entity.CartItem;
-import com.example.shoppingcart.entity.Category;
-import com.example.shoppingcart.entity.Product;
 
-import com.example.shoppingcart.repository.CategoryRepository;
-import com.example.shoppingcart.repository.ProductRepository;
+import com.example.shoppingcart.service.CartService;
 import com.example.shoppingcart.service.ProductService;
-import com.example.shoppingcart.service.ShoppingCartService;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 public class CartController {
-    private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
+    private final CartService cartService;
 
-
-    public CartController(ShoppingCartService shoppingCartService, ProductService productService) {
-
-        this.shoppingCartService = shoppingCartService;
+    public CartController(ProductService productService, CartService cartService) {
         this.productService = productService;
+        this.cartService = cartService;
     }
 
-//    public Controller(ProductRepository productRepository, ShoppingCartService shoppingCartService, ProductMapper productMapper, ShoppingCartRepository shoppingCartRepository) {
-//        this.productRepository = productRepository;
-//        this.shoppingCartService = shoppingCartService;
-//        this.productMapper = productMapper;
-//        this.shoppingCartRepository = shoppingCartRepository;
-//    }
-//
 //    @GetMapping("/productListing")
 //    public List<Product> productListing(){
 //        return productRepository.findAll();
@@ -79,14 +59,19 @@ public class CartController {
 
     @PostMapping("/insert-into-cart")
     public void insertInCart(){
-        shoppingCartService.insertIntoCart();
+        cartService.insertIntoCart();
     }
 
 
 
-    @PostMapping("/add-to-cart")
+//    @PostMapping("/add-to-cart")
+//    public void addInCart(@RequestBody ItemDto itemDto){
+//        productService.addToCart(itemDto);
+//    }
+
+    @PostMapping("/add-in-cart")
     public void addInCart(@RequestBody ItemDto itemDto){
-        productService.addToCart(itemDto);
+        productService.addInCart(itemDto);
     }
 
 

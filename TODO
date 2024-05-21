@@ -14,59 +14,7 @@ Pagina 2
 1.Listare de detalii pe baza user-ului curent
 2.Facturare
 
-
-// Make a builder https://www.digitalocean.com/community/tutorials/builder-design-pattern-in-java
-
-
-
-
-
-17.04.2024 LINKS
-W3 SmartSolutions
-18:11
-https://www.uuidgenerator.net/
-W3 SmartSolutions
-18:23
-https://www.baeldung.com/jpa-one-to-one
-W3 SmartSolutions
-19:30
-https://www.youtube.com/watch?v=6KkqrigHCjg
-https://www.baeldung.com/liquibase-refactor-schema-of-java-app
-
-
-
 !!! One to many bidimensional
 
-W3 SmartSolutions
-18:39
-https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
-W3 SmartSolutions
-19:29
-https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
-W3 SmartSolutions
-19:36
-https://howtodoinjava.com/hibernate/hibernate-one-to-many-mapping/
-W3 SmartSolutions
-19:51
-https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
 
-09.05.2024
-Andrei Bartic
-17:58
-https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
-Andrei Bartic
-18:15
-https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
-https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
 
-15.05.2024
-Andrei Bartic
-18:40
-https://refactoring.guru/design-patterns/builder/java/example
-Andrei Bartic
-18:43
-https://www.digitalocean.com/community/tutorials/builder-design-pattern-in-java
-Andrei Bartic
-19:36
-https://www.baeldung.com/spring-circular-view-path-error
-Xhttps://www.baeldung.com/spring-circular-view-path

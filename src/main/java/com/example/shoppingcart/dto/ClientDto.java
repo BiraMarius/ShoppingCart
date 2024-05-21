@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client2Dto {
+public class ClientDto {
 
     private long clientId;
 

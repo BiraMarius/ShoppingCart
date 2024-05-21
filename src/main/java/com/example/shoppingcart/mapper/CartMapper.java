@@ -2,6 +2,7 @@ package com.example.shoppingcart.mapper;
 
 import com.example.shoppingcart.dto.CartDto;
 import com.example.shoppingcart.dto.CartItemDto;
+import com.example.shoppingcart.dto.ItemDto;
 import com.example.shoppingcart.dto.ProductDto;
 import com.example.shoppingcart.entity.Cart;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 @Component
 public class CartMapper {
 
-    public CartItemDto productToCartItemDtoForCart(ProductDto productDto){
+    public CartItemDto productDtoToCartItemDto(ProductDto productDto){
         CartItemDto cartItemDto = new CartItemDto();
         cartItemDto.setProductId(productDto.getProductId());
         cartItemDto.setName(productDto.getName());
@@ -21,6 +22,21 @@ public class CartMapper {
         cartItemDto.setTotalPerItemType(BigDecimal.valueOf(0));
         cartItemDto.setPricePerItem(productDto.getPrice());
         cartItemDto.setAmount(0);
+        return cartItemDto;
+    }
+
+    public CartItemDto productDtoToCartItemDto(ItemDto itemDto, CartDto cartDto){
+        ProductDto productDto= itemDto.getProductDto();
+        CartItemDto cartItemDto = new CartItemDto();
+        cartItemDto.setProductId(productDto.getProductId());
+        cartItemDto.setName(productDto.getName());
+        cartItemDto.setBrand(productDto.getBrand());
+        cartItemDto.setSmallDescription(productDto.getSmallDescription());
+        cartItemDto.setDescription(productDto.getDescription());
+        cartItemDto.setTotalPerItemType(BigDecimal.valueOf(0));
+        cartItemDto.setPricePerItem(productDto.getPrice());
+        cartItemDto.setAmount(0);
+        cartItemDto.setCartId(cartDto.getCartId());
         return cartItemDto;
     }
 

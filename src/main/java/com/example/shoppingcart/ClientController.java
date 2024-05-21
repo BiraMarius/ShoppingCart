@@ -1,6 +1,6 @@
 package com.example.shoppingcart;
 
-import com.example.shoppingcart.dto.Client2Dto;
+import com.example.shoppingcart.dto.ClientDto;
 import com.example.shoppingcart.entity.Client;
 import com.example.shoppingcart.mapper.ClientMapper;
 import com.example.shoppingcart.repository.ClientRepository;
@@ -19,7 +19,7 @@ public class ClientController {
     }
 
     @PostMapping("/add-client")
-    public String add(@RequestBody Client2Dto clientDto){
+    public String add(@RequestBody ClientDto clientDto){
         Client client = clientRepository.save(clientMapper.dtoToEntity(clientDto));
 //        return clientMapper.clientToDto(client);
         return "Client inserted with ID: "+client.getClientId();

@@ -1,0 +1,70 @@
+package com.example.shoppingcart.service;
+
+import com.example.shoppingcart.entity.Cart;
+import com.example.shoppingcart.entity.CartItem;
+import com.example.shoppingcart.entity.Client;
+import com.example.shoppingcart.mapper.ProductMapper;
+
+import com.example.shoppingcart.repository.ClientRepository;
+import com.example.shoppingcart.repository.CartRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Optional;
+
+@Service
+@AllArgsConstructor
+@ComponentScan("com.example.shoppingcart")
+public class ShoppingCartService {
+    private final ProductMapper productMapper;
+    private final CartRepository shoppingCartRepository;
+    private final ClientRepository clientRepository;
+
+//    public CartItemDto addToCartItemDto(long shoppingCartId, Product product){
+//        List<CartItem> productsInCart = shoppingCartRepository.findByShoppingCartId(shoppingCartId).getCartItemList();
+//        CartItemDto cartItemDto = productMapper.cartItemToDto(productMapper.cartItemToEntity(product));
+//        productsInCart.add(productMapper.cartItemToEntity(product));
+//        shoppingCartRepository.save(shoppingCartRepository.findByShoppingCartId(shoppingCartId));
+//        return cartItemDto;
+//    }
+//
+//    public CartItemDto removeOneCartItem(long shoppingCartId, CartItemDto cartItemDto){
+//        List<CartItem> productsInCart = shoppingCartRepository.findByShoppingCartId(shoppingCartId).getCartItemList();
+//        CartItemDto cartItem = productMapper.cartItemToDto(productsInCart.stream()
+//                .filter(item -> item.getCartItemId() == Long.valueOf(cartItemDto.getCartItemId()))
+//                .findFirst()
+//                .get());
+//        int amount = cartItem.getAmount();
+//        cartItem.setAmount(amount-1);
+//        return cartItem;
+//    }
+//
+//    public CartItemDto addOneCartItem(long shoppingCartId, CartItemDto cartItemDto){
+//        List<CartItem> productsInCart = shoppingCartRepository.findByShoppingCartId(shoppingCartId).getCartItemList();
+//        CartItemDto cartItem = productMapper.cartItemToDto(productsInCart.stream()
+//                .filter(item -> item.getCartItemId() == Long.valueOf(cartItemDto.getCartItemId()))
+//                .findFirst()
+//                .get());
+//        int amount = cartItem.getAmount();
+//        cartItem.setAmount(amount+1);
+//        return cartItem;
+//    }
+
+
+
+    public void insertItemIntoCart(){
+        //cantitate
+        //productID
+        //1 - Obiect tip CartItem
+        //2 - Adaug CartItem la obiectul Cart
+        //- Select in baza de date sa vezi detaliile cartului tau
+        //- daca cartul exista atunci adauga la lista de cartItem si item-ul curent
+        //- daca nu exista fa un obiect de tip cart un obiect de tip cart item si se repteta logica de sus
+
+    }
+
+
+

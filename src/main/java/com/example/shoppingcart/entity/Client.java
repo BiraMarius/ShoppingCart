@@ -21,24 +21,18 @@ public class Client {
     private long clientId;
 
     //cascade give error
-    @OneToMany(
-            //cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="walletsList")
     private List<Wallet> wallets;
 
-    @OneToMany(
-            //cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="addressesList")
     private List<Address> adresses;
 
 //    @OneToOne(mappedBy = "client")
 //    private Favorite favorite;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cartId")
     private Cart cart;
 

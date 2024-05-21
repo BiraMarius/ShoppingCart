@@ -1,7 +1,7 @@
 package com.example.shoppingcart.service;
 
 import com.example.shoppingcart.dto.CartDto;
-import com.example.shoppingcart.dto.Client2Dto;
+import com.example.shoppingcart.dto.ClientDto;
 import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Client;
@@ -26,21 +26,36 @@ public class CartService {
     private final CartRepository shoppingCartRepository;
     private final CartMapper cartMapper;
 
-    public CartDto findCart(long clientId){
-        Client2Dto clientDto = clientService.findClientDto(clientId);
-        if(clientDto.getCart() != null){
-            return cartMapper.cartToDto(clientDto.getCart());
-        } else {
-            return getCartDto(clientId);
+    public Cart findCart(long clientId){
+        //ClientDto clientDto = clientService.findClientDto(clientId);
+        Optional<Client> clientOpt = clientRepository.findById(clientId);
+        if(clientOpt.isPresent()){
+            if(clientOpt.get().getCart() != null){
+                return clientOpt.get().getCart();
+            } else {
+                Cart cart = new Cart();
+                return cart;
+            }
+        }else {
+            return null;
         }
+//        if(clientDto.getCart() != null){
+//            return cartMapper.cartToDto(clientDto.getCart());
+//        } else {
+//
+//            return getCartDto(clientId);
+//        }
     }
 
-    private CartDto getCartDto(long clientId) {
-        CartDto cartDto = new CartDto();
-        Optional<Client> clientOpt = clientRepository.findById(clientId);
-        clientOpt.ifPresent(cartDto::setClient);
-        return cartDto;
-    }
+//    private CartDto getCartDto(long clientId) {
+//        Optional<Client> clientOpt = clientRepository.findById(clientId);
+//        if(clientOpt.isPresent()){
+//            Client client = clientOpt.get();
+//            client.setCart(cartMapper.dtoToEntity(cartDto));
+//        }
+//        //clientOpt.ifPresent(cartDto::setClient);
+//        return cartDto;
+//    }
 
     public BigDecimal pricePerCartItemCalculator(BigDecimal price, int amount){
         return price.multiply(BigDecimal.valueOf(amount));
@@ -100,17 +115,6 @@ public class CartService {
         cart.setTotal(BigDecimal.valueOf(0));
         cart.setCartItemList(Arrays.asList(cartItem, cartItem2));
         shoppingCartRepository.save(cart);
-    }
-
-    public void insertItemIntoCart(){
-        //cantitate
-        //productID
-        //1 - Obiect tip CartItem
-        //2 - Adaug CartItem la obiectul Cart
-        //- Select in baza de date sa vezi detaliile cartului tau
-        //- daca cartul exista atunci adauga la lista de cartItem si item-ul curent
-        //- daca nu exista fa un obiect de tip cart un obiect de tip cart item si se repteta logica de sus
-
     }
 
 }
