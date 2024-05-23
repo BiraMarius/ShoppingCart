@@ -6,9 +6,7 @@ import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Client;
 import com.example.shoppingcart.entity.Product;
 
-import com.example.shoppingcart.mapper.CartItemMapper;
 import com.example.shoppingcart.mapper.CartMapper;
-import com.example.shoppingcart.mapper.ClientMapper;
 import com.example.shoppingcart.repository.CartItemRepository;
 import com.example.shoppingcart.repository.CartRepository;
 import com.example.shoppingcart.repository.ClientRepository;
@@ -36,13 +34,13 @@ public class ProductService {
 //        }
 //    }
 
-    private final CartService cartService;
+
     private final ProductRepository productRepository;
     private final CartMapper cartMapper;
     private final CartRepository cartRepository;
     private final ClientRepository clientRepository;
-    private final ClientMapper clientMapper;
-    private final CartItemMapper cartItemMapper;
+
+
     private final CartItemRepository cartItemRepository;
 
 //    public void addToCart(ItemDto itemDto){
@@ -59,10 +57,10 @@ public class ProductService {
         Client client = optionalToClient(itemDto.getClientId());
         CartDto cartDto = cartMapper.cartToDto(findCart(itemDto.getClientId()));
         List<CartItem> cartItems = cartDto.getCartItemList();
-        CartItem cartItem = cartItemMapper.cartItemFromItemDto(itemDto);
-        cartItems.add(cartItem);
-        cartItem = cartItemRepository.save(cartItem);
-        cartItem.setCart(cartMapper.dtoToEntity(cartDto));
+        //CartItem cartItem = cartItemMapper.cartItemFromItemDto(itemDto);
+        //cartItems.add(cartItem);
+        //cartItem = cartItemRepository.save(cartItem);
+        //cartItem.setCart(cartMapper.dtoToEntity(cartDto));
         cartRepository.save(cartMapper.dtoToEntity(cartDto));
         //cartMapper.productDtoToCartItemDto(itemDto, cartDto);
         //CartItemDto cartItemDto = cartMapper

@@ -10,15 +10,15 @@ public class SpecificationMapper {
     public SpecificationDto specificationToDto(Specification specification){
         return SpecificationDto.builder()
                 .idDto(specification.getSpecificationId())
-                .nameDto(specification.getName())
-                .valueDto(specification.getValue())
+                .nameDto(specification.getSpecificationName())
+                .valueDto(specification.getSpecificationValue())
                 .build();
     }
 
     public Specification dtoToSpecification(SpecificationDto specificationDto){
         return Specification.builder()
-                .name(specificationDto.getNameDto())
-                .value(specificationDto.getValueDto())
+                .specificationName(specificationDto.getNameDto())
+                .specificationValue(specificationDto.getValueDto())
                 .build();
     }
 }

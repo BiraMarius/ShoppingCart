@@ -18,8 +18,8 @@ public class Specification {
     private long specificationId;
 
     @Column
-    private String name;
+    private String specificationName;
 
     @Column
-    private String value;
+    private String specificationValue;
 }

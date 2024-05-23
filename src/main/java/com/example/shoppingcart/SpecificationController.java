@@ -2,12 +2,12 @@ package com.example.shoppingcart;
 
 import com.example.shoppingcart.dto.SpecificationDto;
 import com.example.shoppingcart.service.SpecificationService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
+@RestController
 public class SpecificationController {
     private final SpecificationService specificationService;
 
