@@ -15,20 +15,27 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cartId;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "cart",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<CartItem> cartItemList = new ArrayList<>();
 
-    //Was commented
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "client_id", unique = true)
     private Client client;
 
-    @OneToOne(mappedBy = "cart")
-    private Order Order;
-
+//    @OneToOne(mappedBy = "cart")
+//    private Order Order;
 
     @Column
     private BigDecimal total;
 
-    //add for cart item amount and price (calculating price by amount)
+    public void addCartItem(CartItem cartItem) {
+        cartItemList.add(cartItem);
+        cartItem.setCart(this);
+    }
+
+
 }

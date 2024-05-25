@@ -66,10 +66,11 @@ public class CartController {
         cartService.insertIntoCart();
     }
 
-    @PostMapping("/add-product")
+    @PostMapping("/add-product-on-app")
     public void addProduct(@RequestBody Product product){
         productRepository.save(product);
     }
+    //TODO1: REFACTOR , USE DTO NOT ENTITY, VALIDARE PE DESCRIPTION DACA ESTE NULL THROW EXCEPTION( NU SE POT INSERA PRODUSE FARA DESCRIERE)
 
 
 //    @PostMapping("/add-to-cart")
@@ -81,6 +82,12 @@ public class CartController {
     public void addInCart(@RequestBody ItemDto itemDto){
         productService.addInCart(itemDto);
     }
+
+    @PostMapping("/add-in-cart2")
+    public void addInCart2(@RequestBody ItemDto itemDto){
+        productService.addInCart2(itemDto);
+    }
+
 
 
 

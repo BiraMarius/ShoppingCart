@@ -45,16 +45,16 @@ public class CartMapper {
         cartDto.setCartId(cart.getCartId());
         cartDto.setTotal(cart.getTotal());
         cartDto.setCartItemList(cart.getCartItemList());
-        cartDto.setOrder(cart.getOrder());
+        //cartDto.setOrder(cart.getOrder());
         cartDto.setClient(cart.getClient());
         return  cartDto;
     }
 
     public Cart dtoToEntity(CartDto cartDto){
         Cart cart = new Cart();
-        cart.setCartItemList(cartDto.getCartItemList());
+        //cart.setCartItemList(cartDto.getCartItemList());
         cart.setTotal(cartDto.getTotal());
-        cart.setOrder(cartDto.getOrder());
+        //cart.setOrder(cartDto.getOrder());
         cart.setClient(cartDto.getClient());
         return cart;
     }

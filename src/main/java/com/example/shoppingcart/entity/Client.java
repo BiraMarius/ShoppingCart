@@ -20,7 +20,6 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long clientId;
 
-    //cascade give error
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="walletsList")
     private List<Wallet> wallets;
@@ -32,8 +31,8 @@ public class Client {
 //    @OneToOne(mappedBy = "client")
 //    private Favorite favorite;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cartId")
+    @OneToOne(mappedBy="client", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    //@JoinColumn(name = "cartId")
     private Cart cart;
 
     @Column
@@ -47,5 +46,17 @@ public class Client {
 
     @Column
     private String email;
+
+//    public void setCart(Cart cart) {
+//        if (cart == null) {
+//            if (this.cart != null) {
+//                this.cart.setClient(null);
+//            }
+//        }
+//        else {
+//            cart.setClient(this);
+//        }
+//        this.cart = cart;
+//    }
 
 }

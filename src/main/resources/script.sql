@@ -83,7 +83,57 @@ INSERT INTO CATEGORY(NAME) VALUES('FRUITS');
 SELECT * FROM CATEGORY;
 
 
+//FOR TESTING
+    public void productsAvailable(){
+        Product product1 = new Product();
+        product1.setName("Iphone 23");
+        product1.setBrand("Apple");
+        product1.setDescription("Cel mai nou Iphone cu 32GB RAM");
+        product1.setSmallDescription("32GB RAM, Oled");
+        product1.setPrice(BigDecimal.valueOf(5000));
 
+        Product product2 = new Product();
+        product2.setName("S99");
+        product2.setBrand("Samsung");
+        product2.setDescription("Cel performant televizor cu tehnologia blabla.");
+        product2.setSmallDescription("64GB RAM, Oled, blabla");
+        product2.setPrice(BigDecimal.valueOf(11000));
+
+        Product product3 = new Product();
+        product3.setName("Paracetamol");
+        product3.setBrand("DaciaFarm");
+        product3.setDescription("Medicamentul potrivit pentru dureri de cap si altele");
+        product3.setSmallDescription("Paracetamol cu vitamina X");
+        product3.setPrice(BigDecimal.valueOf(15));
+
+        Product product4 = new Product();
+        product4.setName("Mar Rosu");
+        product4.setBrand("Livada rosie");
+        product4.setDescription("Mere Bio crescute in livada din zona 2");
+        product4.setSmallDescription("Mar rosu BIO");
+        product4.setPrice(BigDecimal.valueOf(2));
+
+        Product product5 = new Product();
+        product5.setName("Gin Boe Violet Fantasy");
+        product5.setBrand("Boe");
+        product5.setDescription("Cel mai aromat gin venit direct din UK");
+        product5.setSmallDescription("Boe Violet");
+        product5.setPrice(BigDecimal.valueOf(250));
+
+        Product product6 = new Product();
+        product6.setName("Prosecco");
+        product6.setBrand("MOET");
+        product6.setDescription("Prosecco stors si fermentat din struguri virgini din Franta si Italia");
+        product6.setSmallDescription("Prosecco France&Italy");
+        product6.setPrice(BigDecimal.valueOf(900));
+
+        productRepository.save(product1);
+        productRepository.save(product2);
+        productRepository.save(product3);
+        productRepository.save(product4);
+        productRepository.save(product5);
+        productRepository.save(product6);
+}
 
 
 
