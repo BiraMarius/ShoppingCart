@@ -53,7 +53,31 @@ public class ShoppingCartService {
 //        return cartItem;
 //    }
 
+    public void cartDetails(long clientId){
+        Optional<Client> optionalClient = clientRepository.findById(clientId);
+        if(optionalClient.isPresent()){
+            Optional<Cart> optionalCart = shoppingCartRepository.findById(optionalClient.get().getClientId());
+        }
 
+    }
+
+    public void insertIntoCart(){
+        Cart cart = new Cart();
+        CartItem cartItem = new CartItem();
+        CartItem cartItem2 = new CartItem();
+
+        cartItem.setAmount(10);
+        cartItem.setTotalPerItemType(BigDecimal.valueOf(100));
+        cartItem.setCart(cart);
+
+        cartItem2.setAmount(20);
+        cartItem2.setTotalPerItemType(BigDecimal.valueOf(200));
+        cartItem2.setCart(cart);
+
+        cart.setTotal(BigDecimal.valueOf(0));
+        cart.setCartItemList(Arrays.asList(cartItem, cartItem2));
+        shoppingCartRepository.save(cart);
+    }
 
     public void insertItemIntoCart(){
         //cantitate
@@ -68,3 +92,7 @@ public class ShoppingCartService {
 
 
 
+
+
+
+}
