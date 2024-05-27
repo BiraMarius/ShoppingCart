@@ -1,11 +1,17 @@
 package com.example.shoppingcart.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(name="Specification")
 @Table(name="specification")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Specification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,5 +21,5 @@ public class Specification {
     private String name;
 
     @Column
-    private String specificationValue;
+    private String value;
 }

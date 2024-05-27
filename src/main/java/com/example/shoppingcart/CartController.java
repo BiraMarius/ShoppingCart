@@ -2,6 +2,8 @@ package com.example.shoppingcart;
 
 import com.example.shoppingcart.dto.ItemDto;
 
+import com.example.shoppingcart.entity.Product;
+import com.example.shoppingcart.repository.ProductRepository;
 import com.example.shoppingcart.service.CartService;
 import com.example.shoppingcart.service.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
     private final ProductService productService;
     private final CartService cartService;
+    private final ProductRepository productRepository;
 
-    public CartController(ProductService productService, CartService cartService) {
+    public CartController(ProductService productService, CartService cartService, ProductRepository productRepository) {
         this.productService = productService;
         this.cartService = cartService;
+        this.productRepository = productRepository;
     }
 
 //    @GetMapping("/productListing")
@@ -56,12 +60,16 @@ public class CartController {
 //        return shoppingCartService.removeOneCartItem(shoppingCart.getShoppingCartId(),cartItemDto);
 //    }
 
-
+// Main problem is that i need first to build the database with Product proprties
     @PostMapping("/insert-into-cart")
     public void insertInCart(){
         cartService.insertIntoCart();
     }
 
+    @PostMapping("/add-product")
+    public void addProduct(@RequestBody Product product){
+        productRepository.save(product);
+    }
 
 
 //    @PostMapping("/add-to-cart")

@@ -4,6 +4,7 @@ import com.example.shoppingcart.dto.ItemDto;
 import com.example.shoppingcart.dto.ProductDto;
 import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.CartItem;
+import com.example.shoppingcart.repository.CartItemRepository;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -11,10 +12,11 @@ import java.math.BigDecimal;
 @Component
 public class CartItemMapper {
     private final ProductMapper productMapper;
-    private final Cart
+    private final CartItemRepository cartItemRepository;
 
-    public CartItemMapper(ProductMapper productMapper) {
+    public CartItemMapper(ProductMapper productMapper, CartItemRepository cartItemRepository) {
         this.productMapper = productMapper;
+        this.cartItemRepository = cartItemRepository;
     }
 
     public CartItem cartItemFromItemDto(ItemDto itemDto){
@@ -22,8 +24,8 @@ public class CartItemMapper {
         CartItem cartItem = new CartItem();
         cartItem.setAmount(itemDto.getAmount());
         cartItem.setTotalPerItemType(BigDecimal.valueOf(0));//TODO CALCULATE VALUE
-        cartItem.setProduct(productMapper.productFromDto(productDto));
 
+        cartItem.setProduct(productMapper.productFromDto(productDto));
         return cartItem;
     }
 }
