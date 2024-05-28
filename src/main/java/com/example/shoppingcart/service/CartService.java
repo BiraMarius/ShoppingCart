@@ -1,10 +1,11 @@
 package com.example.shoppingcart.service;
 
 import com.example.shoppingcart.dto.CartDto;
-import com.example.shoppingcart.dto.ClientDto;
+import com.example.shoppingcart.dto.CartItemDto;
 import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Client;
+import com.example.shoppingcart.mapper.CartItemMapper;
 import com.example.shoppingcart.mapper.CartMapper;
 import com.example.shoppingcart.mapper.ProductMapper;
 import com.example.shoppingcart.repository.ClientRepository;
@@ -13,7 +14,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,8 +26,9 @@ public class CartService {
     private final ProductMapper productMapper;
     private final ClientService clientService;
     private final ClientRepository clientRepository;
-    private final CartRepository shoppingCartRepository;
+    private final CartRepository CartRepository;
     private final CartMapper cartMapper;
+    private final CartItemMapper cartItemMapper;
 
     public Cart findCart(long clientId){
         //ClientDto clientDto = clientService.findClientDto(clientId);
@@ -91,12 +95,29 @@ public class CartService {
 //        return cartItem;
 //    }
 
-    public void cartDetails(long clientId){
+    public List<CartItemDto> cartDetails(long clientId){
         Optional<Client> optionalClient = clientRepository.findById(clientId);
         if(optionalClient.isPresent()){
-            Optional<Cart> optionalCart = shoppingCartRepository.findById(optionalClient.get().getClientId());
+            Optional<Cart> optionalCart = CartRepository.findById(optionalClient.get().getClientId());
+            if(optionalCart.isPresent()){
+                Cart cart = optionalCart.get();
+                CartDto cartDto = cartMapper.cartToDto(cart);
+                return getCartItemsListDto(cartDto.getCartItemList());
+            } else {
+                return "Cart is empty";
+            }
+        } else {
+            return "Client not found";
         }
+    }
 
+    public List<CartItemDto> getCartItemsListDto(List<CartItem> cartItems){
+        List<CartItemDto> cartItemsDto = new ArrayList<>();
+        for(CartItem cartItem : cartItems){
+            CartItemDto cartItemDto = cartItemMapper.entityToDto(cartItem);
+            cartItemsDto.add(cartItemDto);
+        }
+        return cartItemsDto;
     }
 
     public void insertIntoCart(){
@@ -114,7 +135,15 @@ public class CartService {
 
         cart.setTotal(BigDecimal.valueOf(0));
         cart.setCartItemList(Arrays.asList(cartItem, cartItem2));
-        shoppingCartRepository.save(cart);
+        CartRepository.save(cart);
     }
 
+
+    public List<CartItem> cartDetailsByCart(long cartId){
+        Cart cart =
+    }
+
+    public List<CartItem> cartDetailsByClient(long clientId){
+        Client client =
+    }
 }

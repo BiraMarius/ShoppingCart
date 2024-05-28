@@ -1,5 +1,6 @@
 package com.example.shoppingcart.mapper;
 
+import com.example.shoppingcart.dto.CartItemDto;
 import com.example.shoppingcart.dto.ItemDto;
 import com.example.shoppingcart.dto.ProductDto;
 import com.example.shoppingcart.entity.Cart;
@@ -27,5 +28,17 @@ public class CartItemMapper {
 
         cartItem.setProduct(productMapper.productFromDto(productDto));
         return cartItem;
+    }
+
+    public CartItemDto entityToDto(CartItem cartItem){
+        return CartItemDto.builder()
+                .cartId(cartItem.getCart().getCartId())
+                .productId(cartItem.getProduct().getProductId())
+                .name(cartItem.getProduct().getName())
+                .brand(cartItem.getProduct().getBrand())
+                .smallDescription(cartItem.getProduct().getSmallDescription())
+                .amount(cartItem.getAmount())
+                .totalPerItemType(cartItem.getTotalPerItemType())
+                .build();
     }
 }

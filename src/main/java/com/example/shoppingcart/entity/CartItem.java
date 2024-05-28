@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 @Entity(name="CartItem")
 @Table(name="cart_item")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
