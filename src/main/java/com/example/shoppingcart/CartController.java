@@ -1,23 +1,30 @@
 package com.example.shoppingcart;
 
+import com.example.shoppingcart.dto.CartItemDto;
 import com.example.shoppingcart.dto.ItemDto;
 
+import com.example.shoppingcart.dto.ProductDto;
 import com.example.shoppingcart.entity.Product;
+import com.example.shoppingcart.mapper.ProductMapper;
 import com.example.shoppingcart.repository.ProductRepository;
 import com.example.shoppingcart.service.CartService;
 import com.example.shoppingcart.service.ProductService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class CartController {
     private final ProductService productService;
     private final CartService cartService;
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public CartController(ProductService productService, CartService cartService, ProductRepository productRepository) {
+    public CartController(ProductService productService, CartService cartService, ProductRepository productRepository, ProductMapper productMapper) {
         this.productService = productService;
         this.cartService = cartService;
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
 //    @GetMapping("/productListing")
@@ -60,15 +67,15 @@ public class CartController {
 //        return shoppingCartService.removeOneCartItem(shoppingCart.getShoppingCartId(),cartItemDto);
 //    }
 
-// Main problem is that i need first to build the database with Product proprties
     @PostMapping("/insert-into-cart")
     public void insertInCart(){
         cartService.insertIntoCart();
     }
 
     @PostMapping("/add-product-on-app")
-    public void addProduct(@RequestBody Product product){
-        productRepository.save(product);
+    public String addProduct(@RequestBody ProductDto productDto){
+        productRepository.save(productMapper.productFromDto(productDto));
+        return "Product added to database.";
     }
     //TODO1: REFACTOR , USE DTO NOT ENTITY, VALIDARE PE DESCRIPTION DACA ESTE NULL THROW EXCEPTION( NU SE POT INSERA PRODUSE FARA DESCRIERE)
 
@@ -84,15 +91,14 @@ public class CartController {
     }
 
     @PostMapping("/add-in-cart2")
-    public void addInCart2(@RequestBody ItemDto itemDto){
+    public String addInCart2(@RequestBody ItemDto itemDto){
         productService.addInCart2(itemDto);
+        return "Product added to the cart.";
     }
 
-
-
-
-
-
-
+    @GetMapping("/get-cart-details-by-client")
+    public List<CartItemDto> getCartItems(@RequestParam long clientId){
+        return cartService.cartDetailsByClient(clientId);
+    }
 
 }

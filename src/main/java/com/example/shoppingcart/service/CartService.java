@@ -5,6 +5,7 @@ import com.example.shoppingcart.dto.CartItemDto;
 import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Client;
+import com.example.shoppingcart.exceptions.CartIsEmptyException;
 import com.example.shoppingcart.mapper.CartItemMapper;
 import com.example.shoppingcart.mapper.CartMapper;
 import com.example.shoppingcart.mapper.ProductMapper;
@@ -29,9 +30,9 @@ public class CartService {
     private final CartRepository CartRepository;
     private final CartMapper cartMapper;
     private final CartItemMapper cartItemMapper;
+    private final ProductService productService;
 
     public Cart findCart(long clientId){
-        //ClientDto clientDto = clientService.findClientDto(clientId);
         Optional<Client> clientOpt = clientRepository.findById(clientId);
         if(clientOpt.isPresent()){
             if(clientOpt.get().getCart() != null){
@@ -51,63 +52,18 @@ public class CartService {
 //        }
     }
 
-//    private CartDto getCartDto(long clientId) {
-//        Optional<Client> clientOpt = clientRepository.findById(clientId);
-//        if(clientOpt.isPresent()){
-//            Client client = clientOpt.get();
-//            client.setCart(cartMapper.dtoToEntity(cartDto));
-//        }
-//        //clientOpt.ifPresent(cartDto::setClient);
-//        return cartDto;
-//    }
-
     public BigDecimal pricePerCartItemCalculator(BigDecimal price, int amount){
         return price.multiply(BigDecimal.valueOf(amount));
     }
 
-//    public CartItemDto addToCartItemDto(long shoppingCartId, Product product){
-//        List<CartItem> productsInCart = shoppingCartRepository.findByShoppingCartId(shoppingCartId).getCartItemList();
-//        CartItemDto cartItemDto = productMapper.cartItemToDto(productMapper.cartItemToEntity(product));
-//        productsInCart.add(productMapper.cartItemToEntity(product));
-//        shoppingCartRepository.save(shoppingCartRepository.findByShoppingCartId(shoppingCartId));
-//        return cartItemDto;
-//    }
-//
-//    public CartItemDto removeOneCartItem(long shoppingCartId, CartItemDto cartItemDto){
-//        List<CartItem> productsInCart = shoppingCartRepository.findByShoppingCartId(shoppingCartId).getCartItemList();
-//        CartItemDto cartItem = productMapper.cartItemToDto(productsInCart.stream()
-//                .filter(item -> item.getCartItemId() == Long.valueOf(cartItemDto.getCartItemId()))
-//                .findFirst()
-//                .get());
-//        int amount = cartItem.getAmount();
-//        cartItem.setAmount(amount-1);
-//        return cartItem;
-//    }
-//
-//    public CartItemDto addOneCartItem(long shoppingCartId, CartItemDto cartItemDto){
-//        List<CartItem> productsInCart = shoppingCartRepository.findByShoppingCartId(shoppingCartId).getCartItemList();
-//        CartItemDto cartItem = productMapper.cartItemToDto(productsInCart.stream()
-//                .filter(item -> item.getCartItemId() == Long.valueOf(cartItemDto.getCartItemId()))
-//                .findFirst()
-//                .get());
-//        int amount = cartItem.getAmount();
-//        cartItem.setAmount(amount+1);
-//        return cartItem;
-//    }
-
-    public List<CartItemDto> cartDetails(long clientId){
-        Optional<Client> optionalClient = clientRepository.findById(clientId);
-        if(optionalClient.isPresent()){
-            Optional<Cart> optionalCart = CartRepository.findById(optionalClient.get().getClientId());
-            if(optionalCart.isPresent()){
-                Cart cart = optionalCart.get();
-                CartDto cartDto = cartMapper.cartToDto(cart);
-                return getCartItemsListDto(cartDto.getCartItemList());
-            } else {
-                return "Cart is empty";
-            }
+    public List<CartItemDto> cartDetailsByClient(long clientId) throws RuntimeException{
+        Cart cart = productService.findOrCreateCart(clientId);
+        CartDto cartDto = cartMapper.cartToDto(cart);
+        List<CartItem> cartItems = cartDto.getCartItemList();
+        if(cartItems.isEmpty()){
+            throw new CartIsEmptyException("Cart is empty");
         } else {
-            return "Client not found";
+            return getCartItemsListDto(cartItems);
         }
     }
 
@@ -138,12 +94,4 @@ public class CartService {
         CartRepository.save(cart);
     }
 
-
-    public List<CartItem> cartDetailsByCart(long cartId){
-        Cart cart =
-    }
-
-    public List<CartItem> cartDetailsByClient(long clientId){
-        Client client =
-    }
 }

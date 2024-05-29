@@ -72,7 +72,7 @@ public class ProductService {
             }
             return cart;
         } else {
-            throw new ClientNotFoundException("client not found!");
+            throw new ClientNotFoundException("Client not found!");
         }
     }
 
