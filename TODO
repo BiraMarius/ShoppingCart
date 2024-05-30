@@ -1,20 +1,17 @@
 ENDPOINTS:
 I) Adaugare Item in cosul unui client    X
-1.Detalii cos
-2.Listare produse disponibile
-3.Adaugare pe baza @2
+1.Detalii cos                            X
+2.Listare produse disponibile            X
+3.Adaugare pe baza @2                    X
 4.Adaugare stergere cantitate
 5.Muta in favorite
 6.Sterge produs
-
 
 ---------------
 
 Pagina 2
 1.Listare de detalii pe baza user-ului curent
 2.Facturare
-
-!!! One to many bidimensional
 
 
 

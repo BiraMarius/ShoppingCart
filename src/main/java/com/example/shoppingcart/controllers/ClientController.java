@@ -1,4 +1,4 @@
-package com.example.shoppingcart;
+package com.example.shoppingcart.controllers;
 
 import com.example.shoppingcart.dto.ClientDto;
 import com.example.shoppingcart.entity.Client;

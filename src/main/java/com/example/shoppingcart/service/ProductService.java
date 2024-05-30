@@ -7,11 +7,14 @@ import com.example.shoppingcart.entity.Client;
 import com.example.shoppingcart.exceptions.ClientNotFoundException;
 import com.example.shoppingcart.mapper.CartItemMapper;
 import com.example.shoppingcart.mapper.CartMapper;
+import com.example.shoppingcart.mapper.ProductMapper;
 import com.example.shoppingcart.repository.CartRepository;
 import com.example.shoppingcart.repository.ClientRepository;
+import com.example.shoppingcart.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +25,8 @@ public class ProductService {
     private final CartRepository cartRepository;
     private final ClientRepository clientRepository;
     private final CartItemMapper cartItemMapper;
+    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
     public void addInCart(ItemDto itemDto){
         CartDto cartDto = cartMapper.cartToDto(
@@ -76,26 +81,12 @@ public class ProductService {
         }
     }
 
+    public void addProductsToDb(List<ProductDto> products){
+        for(ProductDto productDto : products){
+            productRepository.save(productMapper.productFromDto(productDto));
+        }
+    }
 
 }
-
-//    public void addToCart(ItemDto itemDto){
-//        CartDto cartDto = cartService.findCart(itemDto.getClientId());
-//        CartItemDto cartItemDto = cartMapper.productToCartItemDtoForCart(itemDto.getProductDto());
-//        cartItemDto.setTotalPerItemType(cartService.pricePerCartItemCalculator(itemDto.getProductDto().getPrice(), itemDto.getAmount()));
-//        cartItemDto.setAmount(itemDto.getAmount());
-//        cartItemDto.setShoppingCartId(cartDto.getCartId());
-//        clientRepository.save(clientMapper.findClient(itemDto.getClientId()));
-//        cartRepository.save(cartMapper.dtoToEntity(cartDto));
-//    }
-
-//    private Product findProductById(long id){
-//        Optional<Product> product = productRepository.findById(id);
-//        if(product.isPresent()){
-//            return product.get();
-//        } else {
-//            throw new ProductNotFoundException("Product not found!");
-//        }
-//    }
 
 

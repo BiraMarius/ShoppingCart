@@ -1,4 +1,4 @@
-package com.example.shoppingcart;
+package com.example.shoppingcart.controllers;
 
 import com.example.shoppingcart.dto.SpecificationDto;
 import com.example.shoppingcart.service.SpecificationService;

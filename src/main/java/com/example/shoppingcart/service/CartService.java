@@ -24,10 +24,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CartService {
 
-    private final ProductMapper productMapper;
-    private final ClientService clientService;
     private final ClientRepository clientRepository;
-    private final CartRepository CartRepository;
     private final CartMapper cartMapper;
     private final CartItemMapper cartItemMapper;
     private final ProductService productService;
@@ -76,22 +73,6 @@ public class CartService {
         return cartItemsDto;
     }
 
-    public void insertIntoCart(){
-        Cart cart = new Cart();
-        CartItem cartItem = new CartItem();
-        CartItem cartItem2 = new CartItem();
 
-        cartItem.setAmount(10);
-        cartItem.setTotalPerItemType(BigDecimal.valueOf(100));
-        cartItem.setCart(cart);
-
-        cartItem2.setAmount(20);
-        cartItem2.setTotalPerItemType(BigDecimal.valueOf(200));
-        cartItem2.setCart(cart);
-
-        cart.setTotal(BigDecimal.valueOf(0));
-        cart.setCartItemList(Arrays.asList(cartItem, cartItem2));
-        CartRepository.save(cart);
-    }
 
 }

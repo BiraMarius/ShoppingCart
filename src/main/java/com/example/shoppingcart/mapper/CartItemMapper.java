@@ -13,19 +13,16 @@ import java.math.BigDecimal;
 @Component
 public class CartItemMapper {
     private final ProductMapper productMapper;
-    private final CartItemRepository cartItemRepository;
 
-    public CartItemMapper(ProductMapper productMapper, CartItemRepository cartItemRepository) {
+    public CartItemMapper(ProductMapper productMapper) {
         this.productMapper = productMapper;
-        this.cartItemRepository = cartItemRepository;
     }
 
     public CartItem cartItemFromItemDto(ItemDto itemDto){
         ProductDto productDto = itemDto.getProductDto();
         CartItem cartItem = new CartItem();
         cartItem.setAmount(itemDto.getAmount());
-        cartItem.setTotalPerItemType(BigDecimal.valueOf(0));//TODO CALCULATE VALUE
-
+        cartItem.setTotalPerItemType(BigDecimal.valueOf(0));//TODO> 1 CALCULATE VALUE
         cartItem.setProduct(productMapper.productFromDto(productDto));
         return cartItem;
     }
