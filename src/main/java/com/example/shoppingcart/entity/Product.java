@@ -1,15 +1,16 @@
 package com.example.shoppingcart.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity(name="Product")
 @Table(name="product")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 
     @Id
@@ -33,7 +34,7 @@ public class Product {
     private String name;
 
     @Column
-    private String brand;
+    public String brand;
 
     @Column
     private String description;

@@ -4,6 +4,7 @@ import com.example.shoppingcart.dto.*;
 import com.example.shoppingcart.entity.Cart;
 import com.example.shoppingcart.entity.Client;
 
+import com.example.shoppingcart.entity.Product;
 import com.example.shoppingcart.exceptions.ClientNotFoundException;
 import com.example.shoppingcart.mapper.CartItemMapper;
 import com.example.shoppingcart.mapper.CartMapper;
@@ -11,11 +12,15 @@ import com.example.shoppingcart.mapper.ProductMapper;
 import com.example.shoppingcart.repository.CartRepository;
 import com.example.shoppingcart.repository.ClientRepository;
 import com.example.shoppingcart.repository.ProductRepository;
+import com.example.shoppingcart.specification.ProductSpecification;
+import com.example.shoppingcart.specification.SearchCriteria;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -85,6 +90,18 @@ public class ProductService {
         for(ProductDto productDto : products){
             productRepository.save(productMapper.productFromDto(productDto));
         }
+    }
+
+    public List<ProductDto> mapperForProductList(List<Product> products){
+        return products.stream()
+                .map(productDto -> productMapper.entityToDto(productDto))
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDto> getProductByCriteria(SearchCriteria criteria){
+        ProductSpecification spec = new ProductSpecification(criteria);
+        List<Product> products = productRepository.findAll(spec);
+        return mapperForProductList(products);
     }
 
 }

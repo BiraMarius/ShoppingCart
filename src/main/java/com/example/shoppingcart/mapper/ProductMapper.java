@@ -63,5 +63,19 @@ public class ProductMapper {
         return product;
     }
 
+    public ProductDto entityToDto(Product product){
+        return ProductDto.builder()
+                .productId(product.getProductId())
+                .brand(product.getBrand())
+                .price(product.getPrice())
+                .name(product.getName())
+                .stock(product.getStock())
+                .caracteristicId(product.getProductId())
+                //.categoryId(product.getCategory().getCategoryId())
+                .description(product.getDescription())
+                .smallDescription(product.getSmallDescription())
+                .build();
+    }
+
 
 }

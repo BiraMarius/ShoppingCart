@@ -4,6 +4,8 @@ import com.example.shoppingcart.dto.ProductDto;
 import com.example.shoppingcart.mapper.ProductMapper;
 import com.example.shoppingcart.repository.ProductRepository;
 import com.example.shoppingcart.service.ProductService;
+import com.example.shoppingcart.specification.SearchCriteria;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,5 +34,15 @@ public class ProductController {
     public String productDatabase(@RequestBody List<ProductDto> products){
         productService.addProductsToDb(products);
         return "Product list added.";
+    }
+
+    @GetMapping("/products")
+    public List<ProductDto> listOfAvailableProducts(){
+        return productService.mapperForProductList(productRepository.findAll());
+    }
+
+    @GetMapping("/get-products-by-criteria")
+    public List<ProductDto> findByCriteria(@RequestBody SearchCriteria criteria){
+        return productService.getProductByCriteria(criteria);
     }
 }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -73,6 +74,11 @@ public class CartService {
         return cartItemsDto;
     }
 
+    public List<CartItemDto> getCartItemsWithStream(List<CartItem> cartItems){
+        return cartItems.stream()
+                .map(cartItemMapper::entityToDto)
+                .collect(Collectors.toList());
+    }
 
 
 }
