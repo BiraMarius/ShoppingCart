@@ -104,6 +104,15 @@ public class ProductService {
         return mapperForProductList(products);
     }
 
+    public List<ProductDto> getAvailableProductsInStock(){
+        List<Product> products = productRepository.findAll();
+        return products.stream()
+                .filter(product -> product.getStock()>0)
+                .map(productDto -> productMapper.entityToDto(productDto))
+                .collect(Collectors.toList());
+    }
+
+
 }
 
 

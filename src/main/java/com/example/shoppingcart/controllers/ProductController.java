@@ -1,6 +1,7 @@
 package com.example.shoppingcart.controllers;
 
 import com.example.shoppingcart.dto.ProductDto;
+import com.example.shoppingcart.entity.Product;
 import com.example.shoppingcart.mapper.ProductMapper;
 import com.example.shoppingcart.repository.ProductRepository;
 import com.example.shoppingcart.service.ProductService;
@@ -44,5 +45,10 @@ public class ProductController {
     @GetMapping("/get-products-by-criteria")
     public List<ProductDto> findByCriteria(@RequestBody SearchCriteria criteria){
         return productService.getProductByCriteria(criteria);
+    }
+
+    @GetMapping("/get-available-stock-products")
+    public List<ProductDto> findAvailableProducts(){
+        return productService.getAvailableProductsInStock();
     }
 }
