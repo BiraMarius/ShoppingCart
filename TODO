@@ -2,11 +2,11 @@ ENDPOINTS:
 I) Adaugare Item in cosul unui client    X
 1.Detalii cos                            X
 
-2. Listare produse disponibile
--listare produse in functie de specificatie(pret, reviews)
+2. Listare produse disponibile           X
+-listare produse in functie de specificatie(pret, reviews)   X
 -paginare
 
-3.Adaugare pe baza @2
+3.Adaugare pe baza @2                    X
 4.Adaugare stergere cantitate
 *diferenta intre preincrementare si postincrementare
 5.Muta in favorite

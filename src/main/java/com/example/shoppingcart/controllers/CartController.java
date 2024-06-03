@@ -30,8 +30,16 @@ public class CartController {
 
     @PostMapping("/add-in-cart2")
     public String addInCart2(@RequestBody ItemDto itemDto){
-        productService.addInCart2(itemDto);
-        return "Product added to the cart.";
+        if(itemDto.getProductDto().getStock()>0){
+            if(itemDto.getAmount() <= itemDto.getProductDto().getStock()){
+                productService.addInCart2(itemDto);
+                return "Product added to the cart.";
+            } else {
+                return "Amount requested is not available.";
+            }
+        } else {
+            return "Product not in stock";
+        }
     }
 
     @GetMapping("/get-cart-details-by-client")

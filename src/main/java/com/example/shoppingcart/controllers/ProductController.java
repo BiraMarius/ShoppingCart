@@ -51,4 +51,6 @@ public class ProductController {
     public List<ProductDto> findAvailableProducts(){
         return productService.getAvailableProductsInStock();
     }
+
+
 }
