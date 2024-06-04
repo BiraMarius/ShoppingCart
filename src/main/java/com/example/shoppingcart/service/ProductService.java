@@ -2,9 +2,11 @@ package com.example.shoppingcart.service;
 
 import com.example.shoppingcart.dto.*;
 import com.example.shoppingcart.entity.Cart;
+import com.example.shoppingcart.entity.CartItem;
 import com.example.shoppingcart.entity.Client;
 
 import com.example.shoppingcart.entity.Product;
+import com.example.shoppingcart.exceptions.CartNotFoundException;
 import com.example.shoppingcart.exceptions.ClientNotFoundException;
 import com.example.shoppingcart.mapper.CartItemMapper;
 import com.example.shoppingcart.mapper.CartMapper;
@@ -33,18 +35,6 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public void addInCart(ItemDto itemDto){
-        CartDto cartDto = cartMapper.cartToDto(
-                findCart(itemDto.getClientId())
-        );
-        Cart cart = cartMapper.dtoToEntity(cartDto);
-        //Client client = clientService.optionalToClient(itemDto.getClientId());
-        //client.setCart(cart);
-        cart.addCartItem(cartItemMapper.cartItemFromItemDto(itemDto));
-        //clientService.updateClientCart(clientService.optionalToClient(itemDto.getClientId()), cart);
-        cartRepository.save(cart);
-    }
-
     public Cart findCart(long clientId) throws RuntimeException{
         Optional<Client> clientOpt = clientRepository.findById(clientId);
         if(clientOpt.isPresent()){
@@ -52,9 +42,7 @@ public class ProductService {
             if(client.getCart() != null){
                 return client.getCart();
             } else {
-                Cart cart = new Cart();
-                //cart.setClient(client);
-                return cartRepository.save(cart);
+                throw new CartNotFoundException("Cart not found!");
             }
         } else {
             throw new ClientNotFoundException("Client not found!");
@@ -63,7 +51,9 @@ public class ProductService {
 
     public void addInCart2(ItemDto itemDto){
         Cart cart = findOrCreateCart(itemDto.getClientId());
+        //int cartSize= findCart(itemDto.getClientId()).getCartItemList().size();
         cart.addCartItem(cartItemMapper.cartItemFromItemDto(itemDto));
+
         cartRepository.save(cart);
     }
 
@@ -110,6 +100,12 @@ public class ProductService {
                 .filter(product -> product.getStock()>0)
                 .map(productDto -> productMapper.entityToDto(productDto))
                 .collect(Collectors.toList());
+    }
+
+    public List<ProductDto> addAmount(long clientId, long cartItemId){
+        CartDto cartDto = cartMapper.cartToDto(findCart(clientId));
+        List<CartItem> cartItems = cartDto.getCartItemList();
+
     }
 
 

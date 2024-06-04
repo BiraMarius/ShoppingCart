@@ -23,11 +23,6 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/add-in-cart")
-    public void addInCart(@RequestBody ItemDto itemDto){
-        productService.addInCart(itemDto);
-    }
-
     @PostMapping("/add-in-cart2")
     public String addInCart2(@RequestBody ItemDto itemDto){
         if(itemDto.getProductDto().getStock()>0){
@@ -45,6 +40,11 @@ public class CartController {
     @GetMapping("/get-cart-details-by-client")
     public List<CartItemDto> getCartItems(@RequestParam long clientId){
         return cartService.cartDetailsByClient(clientId);
+    }
+
+    @PostMapping
+    public List<CartItemDto> addAmount(@RequestParam long clientId, @RequestParam long cartItemId){
+
     }
 
 }

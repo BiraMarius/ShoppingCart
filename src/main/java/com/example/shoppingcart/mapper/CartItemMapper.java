@@ -21,6 +21,7 @@ public class CartItemMapper {
     public CartItem cartItemFromItemDto(ItemDto itemDto){
         ProductDto productDto = itemDto.getProductDto();
         CartItem cartItem = new CartItem();
+        //cartItem.setCartItemId();
         cartItem.setAmount(itemDto.getAmount());
         cartItem.setTotalPerItemType(BigDecimal.valueOf(0));//TODO> 1 CALCULATE VALUE
         cartItem.setProduct(productMapper.productFromDto(productDto));
